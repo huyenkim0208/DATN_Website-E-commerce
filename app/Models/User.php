@@ -13,6 +13,10 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, searchableTrait, HasRoles;
+    protected $fillable = [
+        'last_login_at',
+        'last_login_ip',
+    ];
 
     protected $guarded = [];
 
@@ -22,6 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_login_at' => 'datetime',
+        'last_login_ip' => 'datetime',
     ];
 
     protected $appends = ['full_name'];

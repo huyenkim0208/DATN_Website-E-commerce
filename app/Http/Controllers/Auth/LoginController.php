@@ -134,4 +134,12 @@ class LoginController extends Controller
             'alert-type' => 'success',
         ]);
     }
+
+    function authenticated(Request $request, $user)
+    {
+        $user->update([
+            'last_login_at' => Carbon::now(),
+            'last_login_ip' => $request->getClientIp()
+        ]);
+    }
 }

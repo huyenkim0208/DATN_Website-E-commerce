@@ -28,6 +28,7 @@
                     <th>Name & Username</th>
                     <th>Email & Phone</th>
                     <th>Status</th>
+                    <th>Login Time</th>
                     <th>Created at</th>
                     <th class="text-center" style="width: 30px;">Action</th>
                 </tr>
@@ -53,7 +54,8 @@
                             {{ $user->phone }}
                         </td>
                         <td>{{ $user->status }}</td>
-                        <td>{{ $user->created_at ? $user->created_at->format('Y-m-d') : '' }}</td>
+                        <td>{{ $user->last_login_at ? $user->last_login_at->format('d-m-Y H:i:s') : '' }}</td>
+                        <td>{{ $user->created_at ? $user->created_at->format('d-m-Y') : '' }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-primary">
