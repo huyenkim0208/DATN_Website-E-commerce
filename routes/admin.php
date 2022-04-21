@@ -58,4 +58,4 @@ Route::group(['middleware' => ['roles']], function () {
     Route::resource('links', LinkController::class)->except('show');
     Route::resource('pages', PageController::class);
 });
-
+Route::get('/status', 'UserController@userOnlineStatus');

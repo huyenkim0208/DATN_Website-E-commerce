@@ -39,9 +39,9 @@
                                     <div class="product-fruit-img">
                                         @if($product->firstMedia)
                                             <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}"
-                                                 alt="{{ $product->name }}">
+                                                 alt="{{ $product->name }}" width="190px" height="190px">
                                         @else
-                                            <img src="{{ asset('img/cartwhite.png' ) }}" alt="">
+                                            <img src="{{ asset('img/cartwhite.png' ) }}" alt="" width="190px" height="190px">
                                         @endif
                                         <div class="product-furit-action">
                                             <a wire:click.prevent="addToCart('{{ $product->id }}')"

@@ -28,7 +28,6 @@
                     <th>Name & Username</th>
                     <th>Email & Phone</th>
                     <th>Status</th>
-                    <th>Login Time</th>
                     <th>Created at</th>
                     <th class="text-center" style="width: 30px;">Action</th>
                 </tr>
@@ -53,8 +52,14 @@
                         <td>{{ $user->email }}<br>
                             {{ $user->phone }}
                         </td>
-                        <td>{{ $user->status }}</td>
-                        <td>{{ $user->last_login_at ? $user->last_login_at->format('d-m-Y H:i:s') : '' }}</td>
+                        <td>
+                        @if(Cache::has('user-is-online-' . $user->id))
+                          <p>  <span class="text-success">Online</span><br>Login time: {{ $user->last_login_at ? $user->last_login_at->format('d-m-Y H:i:s') : '' }} </p>
+                        @else
+                          <p>  <span class="text-danger">Offline</span><br>Last seen: {{$user->last_seen ? $user->last_seen->format('d-m-Y H:i:s') : 'Not login' }}</p>
+                        @endif
+                        </td>
+                        <td></td>
                         <td>{{ $user->created_at ? $user->created_at->format('d-m-Y') : '' }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">

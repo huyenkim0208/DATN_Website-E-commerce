@@ -2,7 +2,7 @@
     <div class="sidebar-widget mb-40">
         <h3 class="sidebar-title">CATEGORIES</h3>
         @forelse($shop_categories_menu as $category)
-            <div class="py-2 px-4 bg-dark text-white mb-3">
+            <div class="py-2 px-4 text-white mb-3" style="background: #578a01">
                 <strong class="small text-uppercase font-weight-bold">
                     <a class="text-decoration-none text-white" href="{{ route('shop.index', $category->slug) }}">
                         {{ $category->name }}

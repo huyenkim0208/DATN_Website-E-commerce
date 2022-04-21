@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'last_login_at' => 'datetime',
-        'last_login_ip' => 'datetime',
+        'last_seen' => 'datetime',
     ];
 
     protected $appends = ['full_name'];

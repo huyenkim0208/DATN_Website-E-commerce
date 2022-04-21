@@ -1,4 +1,4 @@
-<div wire:ignore id="all-products" class="product-style-area pt-130 pb-30 wow fadeInUp">
+<div wire:ignore id="all-products" class="product-style-area pt-s30 pb-10 wow fadeInUp">
     <div class="section-title-furits text-center mb-95">
         <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
         <h2>TOP TRENDING PRODUCTS</h2>
@@ -18,11 +18,11 @@
                             <div class="product-furit-action">
                                 <a wire:click.prevent="addToCart('{{ $product->id }}')"
                                    class="furit-animate-left" title="Add To Cart">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <i class="fas fa-shopping-cart" style="color: white"></i>
                                 </a>
                                 <a wire:click.prevent="addToWishList('{{ $product->id }}')"
                                    class="furit-animate-right" title="Wishlist">
-                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart" style="color: white"></i>
                                 </a>
                             </div>
                         </div>

@@ -98,9 +98,13 @@
                 aboutLink: 'http://127.0.0.1:8000/',
                 introMessage: "Type 'Start' to start the conversation.",
                 placeholderText: "Press enter to send...",
-            title : "Ali Shop",
+                mainColor:'#578a01',
+                title : "Ali Shop",
+                bubbleBackground:'#578a01',
+                headerTextColor: '#fff',
             };
     </script> 
+   
     <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
     @yield('script')
 </body>
