@@ -43,6 +43,19 @@
                                         @else
                                             <img src="{{ asset('img/cartwhite.png' ) }}" alt="" width="190px" height="190px">
                                         @endif
+                                        <style>
+                                        p.qrcode_style{
+                                            position: absolute;
+                                            top: 5%;
+                                            right: 3%;
+                                        }
+                                        </style>
+                                        @php 
+                                        $qrcode_url = url('product/'.$product->slug);
+                                        $utf8_2 = mb_convert_encoding($qrcode_url, 'UTF-8', 'ISO-8859-1');
+                                        @endphp
+
+                                        <p class="qrcode_style">{{QrCode::size(50)->generate($utf8_2)}}</p>
                                         <div class="product-furit-action">
                                             <a wire:click.prevent="addToCart('{{ $product->id }}')"
                                                class="furit-animate-left" title="Add To Cart">
@@ -91,6 +104,7 @@
                                         @else
                                             <img src="{{ asset('img/cartwhite.png' ) }}" alt="{{ $product->name }}" style="width: 100%;">
                                         @endif
+                                        
                                     </div>
                                     <div class="product-content-list">
                                         <div class="product-list-info">
