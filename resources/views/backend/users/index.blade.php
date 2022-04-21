@@ -59,7 +59,6 @@
                           <p>  <span class="text-danger">Offline</span><br>Last seen: {{$user->last_seen ? $user->last_seen->format('d-m-Y H:i:s') : 'Not login' }}</p>
                         @endif
                         </td>
-                        <td></td>
                         <td>{{ $user->created_at ? $user->created_at->format('d-m-Y') : '' }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
