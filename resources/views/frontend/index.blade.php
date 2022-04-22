@@ -257,7 +257,7 @@
 						<div class="photo-6-inf-right col-lg-6">
 								<h3 class="hny-title text-left">All Branded Men's Suits are Flat <span>30% Discount</span></h3>
 								<p>Visit our shop to see amazing creations from our designers.</p>
-								<a href="http://localhost:8000/shop" class="read-more btn">
+								<a href="http://127.0.0.1:8000/shop/men-clothes" class="read-more btn">
 										Shop Now
 								</a>
 						</div>
