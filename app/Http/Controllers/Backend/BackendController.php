@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
 
 class BackendController extends Controller
 {
     public function index(): View
     {
-        return view('backend.index');
+        $products = Product::with('category', 'tags', 'firstMedia')->get();
+        return view('backend.index', compact('products'));
     }
+    
 }

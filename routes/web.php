@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\CartController;
@@ -8,7 +9,6 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\UserController;
-use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\BotManController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\ShopTagController;
@@ -16,6 +16,8 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\Payment\TapController;
 use App\Http\Controllers\Frontend\Payment\PaypalController;
+
+
 
 Auth::routes(['verify' => true]);
 

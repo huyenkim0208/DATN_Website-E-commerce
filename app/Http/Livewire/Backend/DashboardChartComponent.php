@@ -3,8 +3,9 @@
 namespace App\Http\Livewire\Backend;
 
 use App\Models\Order;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class DashboardChartComponent extends Component
 {
