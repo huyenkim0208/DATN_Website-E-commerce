@@ -12,7 +12,11 @@ use App\Traits\ImageUploadTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use App\Exports\ProductExport;
+use App\Exports\ProductExportQuery;
+use App\Exports\ProductExportView;
+use Maatwebsite\Excel\Facades\Excel;
 class ProductController extends Controller
 {
     use ImageUploadTrait;
@@ -159,5 +163,18 @@ class ProductController extends Controller
         $ids = $request->ids;
         Product::whereIn('id',explode(",",$ids))->delete();
         return response()->json(['success'=>"Xóa thành công."]);
+    }
+    public function export(Request $request)
+    {
+        $type = $request->type;
+        
+        if($request->created!="" && $request->template==""){
+            $now = new Carbon($request->created);
+            $year = $now->year;
+            $created = $request->created;
+            return Excel::download(new ProductExportQuery($year,$created),'products.'.$type);
+        }
+        return Excel::download(new ProductExport, 'products.'.$type);
+
     }
 }

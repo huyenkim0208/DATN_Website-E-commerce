@@ -7,13 +7,13 @@
                 Orders
             </h6>
             <div class="ml-auto">
-
+            <a class="font-weight-bold" href="{{route('export_order',['1','type'=>'xlsx','template'=>'template-export-excel'])}}">Export to Excel</a>
             </div>
         </div>
 
         @include('backend.orders.filter')
-
         <div class="table-responsive">
+       
             <table class="table table-hover">
                 <thead>
                 <tr>

@@ -11,6 +11,11 @@ use App\Services\OmnipayService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Exports\OrderExport;
+use App\Exports\OrderExportQuery;
+use App\Exports\OrderExportView;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -120,5 +125,19 @@ class OrderController extends Controller
             'message' => 'Deleted successfully',
             'alert-type' => 'success'
         ]);
+    }
+
+    public function export(Request $request)
+    {
+        $type = $request->type;
+        
+        if($request->created!="" && $request->template==""){
+            $now = new Carbon($request->created);
+            $year = $now->year;
+            $created = $request->created;
+            return Excel::download(new OrderExportQuery($year,$created),'orders.'.$type);
+        }
+        return Excel::download(new OrderExport, 'orders.'.$type);
+
     }
 }

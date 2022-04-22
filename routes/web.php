@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PageController;
@@ -60,3 +61,5 @@ Route::group(['middleware' => 'auth'], function (): void {
 
 //delete all (admin)
 Route::delete('myproductsDeleteAll', [ProductController::class, 'deleteAll']);
+Route::get('/export/{product}',[ProductController::class, 'export'])->name('export');
+Route::get('/export_order/{order}',[OrderController::class, 'export'])->name('export_order');

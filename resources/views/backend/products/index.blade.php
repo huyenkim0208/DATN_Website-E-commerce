@@ -9,7 +9,8 @@
                 Products
             </h6>
             <div class="ml-auto">
-                @can('create_category')
+            <a class="font-weight-bold" href="{{route('export',['1','type'=>'xlsx','template'=>'template-export-excel'])}}">Export to Excel</a>
+                @can('create_product')
                     <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
                     <span class="icon text-white-50">
                         <i class="fa fa-plus"></i>
@@ -23,6 +24,7 @@
         @include('partials.backend.filter', ['model' => route('admin.products.index')])
 
         <div class="table-responsive">
+       
         <button style="margin-bottom: 20px; display: none" class="btn btn-danger delete_all ml-4" data-url="{{ url('myproductsDeleteAll') }}">Delete</button>
             <table class="table table-hover">
                 <thead>
