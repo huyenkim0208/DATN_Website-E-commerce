@@ -691,22 +691,36 @@
 
 							<div class="carousel-item active">
 								<div class="row">
+									@foreach($reviews as $review)
 									<div class="col-md-3">
 										<div class="customer-info text-center">
+											<a href="{{route('product.show', $review->product->slug)}}">
 											<div class="feedback-hny">
-												<span class="fa fa-quote-left"></span>
-												<p class="feedback-para">Lorem, ipsum dolor sit amet consectetur
-													adipisicing elit. Labore rem, dicta assumenda mollitia molestias
-													quas nihil quasis.</p>
+											<small class="comnt__author text-center" style="color: white;">{{ $review->created_at ? $review->created_at->format('d M, Y') : '' }} - {{$review->product->name}}</small>
+												<div>
+													@if($review->rating)
+														@for($i = 0; $i < 5; $i++)
+															<i class="{{ round($review->rating) <= $i ? 'far' : 'fas' }} fa-star" style="color: #FFCA00"></i>
+														@endfor
+													@endif
+												</div>
+												<p class="feedback-para">{{$review->content}}<p>
 											</div>
+											</a>
 											<div class="feedback-review mt-4">
-												<img src="assets/images/c1.jpg" class="img-fluid" alt="">
-												<h5>Smith Roy</h5>
+												@if($review->user->user_image)
+												<img src="{{ asset('storage/images/users/' . $review->user->user_image) }}" class="" width="50px" height="60px" alt="{{ $review->user->full_name }}">
+												@else 
+												<img src="{{ asset('img/avatar.png') }}"
+                                    			 class="" width="50px" height="60px" alt="{{ $review->user->full_name }}">
+												@endif
+												<h5>{{$review->user->full_name}}</h5>
 
 											</div>
 										</div>
 									</div>
-									<div class="col-md-3">
+									@endforeach
+									<!-- <div class="col-md-3">
 											<div class="customer-info text-center">
 													<div class="feedback-hny">
 														<span class="fa fa-quote-left"></span>
@@ -750,7 +764,7 @@
 		
 													</div>
 												</div>
-									</div>
+									</div> -->
 								</div>
 								<!--.row-->
 							</div>
@@ -758,66 +772,36 @@
 
 							<div class="carousel-item">
 								<div class="row">
+								@foreach($reviews as $review)
 									<div class="col-md-3">
-											<div class="customer-info text-center">
-													<div class="feedback-hny">
-														<span class="fa fa-quote-left"></span>
-														<p class="feedback-para">Lorem, ipsum dolor sit amet consectetur
-															adipisicing elit. Labore rem, dicta assumenda mollitia molestias
-															quas nihil quasis.</p>
-													</div>
-													<div class="feedback-review mt-4">
-														<img src="assets/images/c4.jpg" class="img-fluid" alt="">
-														<h5>John Lee</h5>
-		
-													</div>
+										<div class="customer-info text-center">
+											<a href="{{route('product.show', $review->product->slug)}}">
+											<div class="feedback-hny">
+											<small class="comnt__author text-center" style="color: white;">{{ $review->created_at ? $review->created_at->format('d M, Y') : '' }} - {{$review->product->name}}</small>
+												<div>
+													@if($review->rating)
+														@for($i = 0; $i < 5; $i++)
+															<i class="{{ round($review->rating) <= $i ? 'far' : 'fas' }} fa-star" style="color: #FFCA00"></i>
+														@endfor
+													@endif
 												</div>
-									</div>
-									<div class="col-md-3">
-											<div class="customer-info text-center">
-													<div class="feedback-hny">
-														<span class="fa fa-quote-left"></span>
-														<p class="feedback-para">Lorem, ipsum dolor sit amet consectetur
-															adipisicing elit. Labore rem, dicta assumenda mollitia molestias
-															quas nihil quasis.</p>
-													</div>
-													<div class="feedback-review mt-4">
-														<img src="assets/images/c3.jpg" class="img-fluid" alt="">
-														<h5>Laura Sten</h5>
-		
-													</div>
-												</div>
-									</div>
-									<div class="col-md-3">
-											<div class="customer-info text-center">
-												<div class="feedback-hny">
-													<span class="fa fa-quote-left"></span>
-													<p class="feedback-para">Lorem, ipsum dolor sit amet consectetur
-														adipisicing elit. Labore rem, dicta assumenda mollitia molestias
-														quas nihil quasis.</p>
-												</div>
-												<div class="feedback-review mt-4">
-													<img src="assets/images/c1.jpg" class="img-fluid" alt="">
-													<h5>Smith Roy</h5>
-	
-												</div>
+												<p class="feedback-para">{{$review->content}}<p>
+											</div>
+											</a>
+											<div class="feedback-review mt-4">
+												@if($review->user->user_image)
+												<img src="{{ asset('storage/images/users/' . $review->user->user_image) }}" class="" width="50px" height="60px" alt="{{ $review->user->full_name }}">
+												@else 
+												<img src="{{ asset('img/avatar.png') }}"
+                                    			 class="" width="50px" height="60px" alt="{{ $review->user->full_name }}">
+												@endif
+												<h5>{{$review->user->full_name}}</h5>
+
 											</div>
 										</div>
-										<div class="col-md-3">
-												<div class="customer-info text-center">
-														<div class="feedback-hny">
-															<span class="fa fa-quote-left"></span>
-															<p class="feedback-para">Lorem, ipsum dolor sit amet consectetur
-																adipisicing elit. Labore rem, dicta assumenda mollitia molestias
-																quas nihil quasis.</p>
-														</div>
-														<div class="feedback-review mt-4">
-															<img src="assets/images/c2.jpg" class="img-fluid" alt="">
-															<h5>Lora Grill</h5>
-			
-														</div>
-													</div>
-										</div>
+									</div>
+									@endforeach
+									
 								</div>
 								<!--.row-->
 							</div>

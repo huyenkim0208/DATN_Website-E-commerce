@@ -4075,6 +4075,7 @@ a.read-more-btn2.btn:hover {
   left: 0;
   right: 0;
   z-index: -1;
+
 }
 
 .w3l-banner-slider-main .carousel-caption h3 {
@@ -6830,6 +6831,7 @@ iframe {
   text-align: center;
   background-color: #232020;
   border-radius: 6px;
+  height: 200px;
 }
 
 .w3l-customers-sec-6 .feedback-hny:after {
@@ -6855,6 +6857,14 @@ iframe {
   font-size: 15px;
   color: #d4d1d1;
   margin-top: 16px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 25px;
+  -webkit-line-clamp: 2;
+  height: 55px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 .w3l-customers-sec-6 .feedback-hny span.fa {

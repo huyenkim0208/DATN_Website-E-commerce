@@ -154,4 +154,10 @@ class ProductController extends Controller
 
         return true;
     }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Product::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Xóa thành công."]);
+    }
 }

@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -21,13 +23,14 @@
         @include('partials.backend.filter', ['model' => route('admin.products.index')])
 
         <div class="table-responsive">
+        <button style="margin-bottom: 20px; display: none" class="btn btn-danger delete_all ml-4" data-url="{{ url('myproductsDeleteAll') }}">Delete</button>
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th width="50px"><input type="checkbox" id="master"></th>
                     <th>ID</th>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Feature</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Tags</th>
@@ -39,7 +42,8 @@
                 </thead>
                 <tbody>
                 @forelse($products as $product)
-                    <tr>
+                    <tr id="tr_{{$product->id}}">
+                        <td><input type="checkbox" class="sub_chk" data-id="{{$product->id}}"></td>
                         <td>{{ $product->id }}</td>
                         <td>
                             @if($product->firstMedia)
@@ -50,7 +54,6 @@
                             @endif
                         </td>
                         <td><a href="{{ route('admin.products.show', $product->id) }}">{{ $product->name }}</a></td>
-                        <td>{{ $product->featured }}</td>
                         <td>{{ $product->quantity }}</td>
                         <td>$ {{ $product->price }}</td>
                         <td class="text-danger">{{ $product->tags->pluck('name')->join(', ') }}</td>
@@ -95,4 +98,94 @@
             </table>
         </div>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#master').on('click', function(e) {
+         if($(this).is(':checked',true))  
+         {
+            $(".sub_chk").prop('checked', true);  
+            $(".delete_all").fadeIn(0.5);
+         } else {  
+            $(".sub_chk").prop('checked',false);  
+            $(".delete_all").fadeOut(0.5);
+         }  
+        });
+        $(".sub_chk").click(function(e){
+            if($(".sub_chk").is(':checked',true))  {
+                $(".delete_all").fadeIn(0.5);
+            } else {
+                $(".delete_all").fadeOut(0.5);
+            }
+            
+        });
+        $('.delete_all').on('click', function(e) {
+            var allVals = [];  
+            $(".sub_chk:checked").each(function() {  
+                allVals.push($(this).attr('data-id'));
+            });  
+            if(allVals.length <=0)  
+            {  
+                alert("Please select route!");  
+            }  else {  
+                var check = confirm("Are you sure delete this product?");  
+                if(check == true){  
+                    var join_selected_values = allVals.join(","); 
+                    $.ajax({
+                        url: $(this).data('url'),
+                        type: 'DELETE',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: 'ids='+join_selected_values,
+                        success: function (data) {
+                            if (data['success']) {
+                                $(".sub_chk:checked").each(function() {  
+                                    $(this).parents("tr").remove();
+                                });
+                                alert(data['success']);
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                  $.each(allVals, function( index, value ) {
+                      $('table tr').filter("[data-row-id='" + value + "']").remove();
+                  });
+                }  
+            }  
+        });
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+            onConfirm: function (event, element) {
+                element.trigger('confirm');
+            }
+        });
+        $(document).on('confirm', function (e) {
+            var ele = e.target;
+            e.preventDefault();
+            $.ajax({
+                url: ele.href,
+                type: 'DELETE',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success: function (data) {
+                    if (data['success']) {
+                        $("#" + data['tr']).slideUp("slow");
+                        alert(data['success']);
+                    } else if (data['error']) {
+                        alert(data['error']);
+                    } else {
+                        alert('Whoops Something went wrong!!');
+                    }
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+            return false;
+        });
+    });
+</script>    
 @endsection

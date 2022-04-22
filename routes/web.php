@@ -7,14 +7,14 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Frontend\BotManController;
 use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShopTagController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\Payment\TapController;
 use App\Http\Controllers\Frontend\Payment\PaypalController;
-use App\Http\Controllers\Frontend\BotManController;
 
 Auth::routes(['verify' => true]);
 
@@ -57,3 +57,6 @@ Route::group(['middleware' => 'auth'], function (): void {
         Route::get('/payment/charge-update', [TapController::class, 'chargeUpdate'])->name('checkout.charge_update');
     });
 });
+
+//delete all (admin)
+Route::delete('myproductsDeleteAll', [ProductController::class, 'deleteAll']);

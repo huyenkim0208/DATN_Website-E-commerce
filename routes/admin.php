@@ -59,3 +59,5 @@ Route::group(['middleware' => ['roles']], function () {
     Route::resource('pages', PageController::class);
 });
 Route::get('/status', 'UserController@userOnlineStatus');
+
+

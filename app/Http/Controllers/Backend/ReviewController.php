@@ -13,7 +13,7 @@ class ReviewController extends Controller
     public function index(): View
     {
         $this->authorize('access_review');
-
+ 
         $reviews = Review::with('product', 'user')
             ->when(\request()->keyword != null, function ($query) {
                 $query->search(\request()->keyword);
