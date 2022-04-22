@@ -61,5 +61,8 @@ Route::group(['middleware' => 'auth'], function (): void {
 
 //delete all (admin)
 Route::delete('myproductsDeleteAll', [ProductController::class, 'deleteAll']);
-Route::get('/export/{product}',[ProductController::class, 'export'])->name('export');
-Route::get('/export_order/{order}',[OrderController::class, 'export'])->name('export_order');
+
+//export&import excel
+Route::get('/export/{product}', [ProductController::class, 'export'])->name('export');
+Route::get('/export_order/{order}', [OrderController::class, 'export'])->name('export_order');
+Route::post('/import', [ProductController::class, 'import'])->name('import');

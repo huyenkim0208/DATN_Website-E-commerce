@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\ProductRequest;
-use App\Models\Category;
-use App\Models\Product;
+use Carbon\Carbon;
 use App\Models\Tag;
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 use App\Services\ImageService;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Exports\ProductExport;
-use App\Exports\ProductExportQuery;
 use App\Exports\ProductExportView;
+use App\Exports\ProductExportQuery;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Backend\ProductRequest;
+
 class ProductController extends Controller
 {
     use ImageUploadTrait;
@@ -176,5 +178,12 @@ class ProductController extends Controller
         }
         return Excel::download(new ProductExport, 'products.'.$type);
 
+    }
+
+    public function import() 
+    {
+        Excel::import(new ProductImport,request()->file('file'));
+           
+        return back();
     }
 }

@@ -10,6 +10,7 @@
             </h6>
             <div class="ml-auto">
             <a class="font-weight-bold" href="{{route('export',['1','type'=>'xlsx','template'=>'template-export-excel'])}}">Export to Excel</a>
+            <div class="btn font-weight-bold" data-toggle="modal" data-target="#exampleModal"></i>Import Excel</div>   
                 @can('create_product')
                     <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
                     <span class="icon text-white-50">
@@ -24,6 +25,33 @@
         @include('partials.backend.filter', ['model' => route('admin.products.index')])
 
         <div class="table-responsive">
+
+       
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 150px">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel" style="color: black">Import Product Data</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"> 
+                        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="file" class="form-control">
+                                <br>
+                   </div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-success">Import</button>
+					</div>
+                    </form> 
+				</div> 
+              
+				</div>
+				</div>       
        
         <button style="margin-bottom: 20px; display: none" class="btn btn-danger delete_all ml-4" data-url="{{ url('myproductsDeleteAll') }}">Delete</button>
             <table class="table table-hover">
