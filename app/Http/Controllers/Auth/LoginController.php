@@ -99,13 +99,13 @@ class LoginController extends Controller
 
     // Facebook Function to Log in
     public function handleProviderCallback($provider)
-    {
+    {  
         $socialUser = Socialite::driver($provider)->user();
 
         $id = $socialUser->getId();
         $token = $socialUser->token;
-        $nickName = $socialUser->getNickname();
         $name = $socialUser->getName();
+        $nickName = $socialUser->getNickname() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) : $socialUser->getNickname();
         $email = $socialUser->getEmail() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) . '@' . $provider . '.com' : $socialUser->getEmail();
         $user_image = $socialUser->getAvatar();
 
@@ -114,7 +114,7 @@ class LoginController extends Controller
             [
                 'first_name' => $name,
                 'last_name' => $name,
-                'username' => $nickName != '' ? $nickName : trim(Str::lower(Str::replaceArray(' ', ['_'], $name))),
+                'username' => $nickName,
                 'email' => $email,
                 'email_verified_at' => Carbon::now(),
                 'phone' => null,
